@@ -83,6 +83,7 @@ public class ReleaseContext
     private String eol;
     private boolean releaseSnapshots;
     private boolean addScmCommentSuffixOnMerge;
+    private boolean noVerify;
 
     public ReleaseContext(File baseDir)
     {
@@ -132,6 +133,8 @@ public class ReleaseContext
         this.eol = "";
         this.versionNumberToIncrement = "2";
         this.releaseSnapshots = true;
+        this.noVerify = false;
+        this.noVerify = false;
     }
 
     public boolean isAllowSnapshots()
@@ -683,6 +686,15 @@ public class ReleaseContext
 
     public ReleaseContext setAddScmCommentSuffixOnMerge(boolean addScmCommentSuffixOnMerge) {
         this.addScmCommentSuffixOnMerge = addScmCommentSuffixOnMerge;
+        return this;
+    }
+
+    public boolean isNoVerify() {
+        return noVerify;
+    }
+
+    public ReleaseContext setNoVerify(boolean noVerify) {
+        this.noVerify = noVerify;
         return this;
     }
 }

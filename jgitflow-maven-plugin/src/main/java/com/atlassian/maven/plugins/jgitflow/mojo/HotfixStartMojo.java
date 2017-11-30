@@ -81,6 +81,12 @@ public class HotfixStartMojo extends AbstractJGitFlowMojo
     @Parameter(defaultValue = "")
     private String hotfixStartExtension = "";
 
+    /**
+     * If set to true, skip pre-commit and message hooks.
+     */
+    @Parameter(defaultValue = "false", property = "noVerifyHotfix")
+    protected boolean noVerifyHotfix = false;
+
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException
     {
@@ -111,7 +117,8 @@ public class HotfixStartMojo extends AbstractJGitFlowMojo
            .setPassword(password)
                 .setEol(eol)
            .setHotfixStartExtension(extensionObject)
-           .setFlowInitContext(getFlowInitContext().getJGitFlowContext());
+           .setFlowInitContext(getFlowInitContext().getJGitFlowContext())
+           .setNoVerify(noVerifyHotfix);
 
         try
         {

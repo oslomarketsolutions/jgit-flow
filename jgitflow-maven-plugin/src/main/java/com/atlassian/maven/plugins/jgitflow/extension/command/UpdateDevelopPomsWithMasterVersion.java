@@ -90,7 +90,7 @@ public class UpdateDevelopPomsWithMasterVersion implements ExtensionCommand
 
             pomUpdater.copyPomVersionsFromProject(masterProjects, developProjects);
 
-            projectHelper.commitAllPoms(flow.git(), developProjects, ctx.getScmCommentPrefix() + "updating develop poms to master versions to avoid merge conflicts" + ctx.getScmCommentSuffix());
+            projectHelper.commitAllPoms(flow.git(), developProjects, ctx.getScmCommentPrefix() + "updating develop poms to master versions to avoid merge conflicts" + ctx.getScmCommentSuffix(), ctx.isNoVerify());
 
             flow.git().checkout().setName(originalBranchName).call();
 

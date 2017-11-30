@@ -87,7 +87,7 @@ public class UpdateFeaturePomsWithFinalVersionsCommand implements ExtensionComma
 
             pomUpdater.removeFeatureVersionFromSnapshotVersions(ProjectCacheKey.FEATURE_FINISH_LABEL, featureVersion, branchProjects);
 
-            projectHelper.commitAllPoms(flow.git(), branchProjects, ctx.getScmCommentPrefix() + "updating poms for " + featureVersion + " version" + ctx.getScmCommentSuffix());
+            projectHelper.commitAllPoms(flow.git(), branchProjects, ctx.getScmCommentPrefix() + "updating poms for " + featureVersion + " version" + ctx.getScmCommentSuffix(), ctx.isNoVerify());
 
         }
         catch (Exception e)

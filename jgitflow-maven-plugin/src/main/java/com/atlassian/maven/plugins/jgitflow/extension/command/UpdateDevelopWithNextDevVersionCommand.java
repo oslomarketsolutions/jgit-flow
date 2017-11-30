@@ -87,7 +87,7 @@ public class UpdateDevelopWithNextDevVersionCommand implements ExtensionCommand
 
             pomUpdater.updatePomsWithNextDevelopmentVersion(ProjectCacheKey.DEVELOP_BRANCH, developProjects);
 
-            projectHelper.commitAllPoms(flow.git(), developProjects, ctx.getScmCommentPrefix() + "updating poms for " + developLabel + " development" + ctx.getScmCommentSuffix());
+            projectHelper.commitAllPoms(flow.git(), developProjects, ctx.getScmCommentPrefix() + "updating poms for " + developLabel + " development" + ctx.getScmCommentSuffix(), ctx.isNoVerify());
 
             flow.git().checkout().setName(originalBranchName).call();
 

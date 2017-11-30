@@ -69,6 +69,7 @@ public abstract class AbstractGitFlowCommand<C, T> implements Callable<T>, JGitF
     private String scmMessageSuffix;
     private boolean fetch;
     private boolean push;
+    private boolean noVerify;
     private final String branchName;
 
     protected AbstractGitFlowCommand(String branchName, Git git, GitFlowConfiguration gfConfig)
@@ -86,6 +87,7 @@ public abstract class AbstractGitFlowCommand<C, T> implements Callable<T>, JGitF
         this.scmMessageSuffix = "";
         this.fetch = false;
         this.push = false;
+        this.noVerify = false;
         this.branchName = branchName;
     }
 
@@ -261,6 +263,24 @@ public abstract class AbstractGitFlowCommand<C, T> implements Callable<T>, JGitF
     public boolean isPush()
     {
         return push;
+    }
+
+    /**
+     * Set whether to use the noVerify flag when committing to avoid running pre-commit hooks.
+     *
+     * @param noVerify {@code true} to disable hooks, {@code false}(default) otherwise
+     * @return {@code this}
+     */
+    @Override
+    public C setNoVerify(boolean noVerify)
+    {
+        this.noVerify = noVerify;
+        return (C) this;
+    }
+
+    @Override
+    public boolean isNoVerify() {
+        return noVerify;
     }
 
     @Override

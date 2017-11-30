@@ -110,7 +110,7 @@ public class UpdatePomsWithNonSnapshotCommand extends AbstractLogEnabled impleme
 
             pomUpdater.removeSnapshotFromPomVersions(cacheKey, versionSuffix, branchProjects);
 
-            projectHelper.commitAllPoms(flow.git(), branchProjects, ctx.getScmCommentPrefix() + "updating poms for branch'" + fullBranchName + "' with non-snapshot versions" + ctx.getScmCommentSuffix());
+            projectHelper.commitAllPoms(flow.git(), branchProjects, ctx.getScmCommentPrefix() + "updating poms for branch'" + fullBranchName + "' with non-snapshot versions" + ctx.getScmCommentSuffix(), ctx.isNoVerify());
         }
         catch (Exception e)
         {

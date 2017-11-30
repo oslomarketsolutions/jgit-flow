@@ -81,7 +81,7 @@ public class UpdateDevelopWithPreviousVersionsCommand implements ExtensionComman
             List<MavenProject> developProjects = checkoutAndGetProjects.run(flow.getDevelopBranchName()).getProjects();
 
             pomUpdater.copyPomVersionsFromMap(versionCacheProvider.getCachedVersions(), developProjects);
-            projectHelper.commitAllPoms(git, developProjects, ctx.getScmCommentPrefix() + "Updating develop poms back to pre merge state" + ctx.getScmCommentSuffix());
+            projectHelper.commitAllPoms(git, developProjects, ctx.getScmCommentPrefix() + "Updating develop poms back to pre merge state" + ctx.getScmCommentSuffix(), ctx.isNoVerify());
 
             flow.git().checkout().setName(originalBranchName).call();
         }
