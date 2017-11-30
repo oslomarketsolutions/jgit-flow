@@ -44,7 +44,7 @@ public interface ProjectHelper
 
     void commitAllChanges(Git git, String message) throws MavenJGitFlowException;
 
-    void commitAllPoms(Git git, List<MavenProject> reactorProjects, String message) throws MavenJGitFlowException;
+    void commitAllPoms(Git git, List<MavenProject> reactorProjects, String message, boolean noVerify) throws MavenJGitFlowException;
 
     void checkPomForVersionState(VersionState state, List<MavenProject> reactorProjects) throws MavenJGitFlowException;
 

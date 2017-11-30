@@ -112,6 +112,12 @@ public class ReleaseStartMojo extends AbstractJGitFlowMojo
     @Parameter(defaultValue = "true", property = "releaseSnapshots")
     private boolean releaseSnapshots = true;
 
+    /**
+     * If set to true, skip pre-commit and message hooks when committing.
+     */
+    @Parameter(defaultValue = "false", property = "noVerifyRelease")
+    protected boolean noVerifyRelease = false;
+
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException
     {
@@ -147,7 +153,8 @@ public class ReleaseStartMojo extends AbstractJGitFlowMojo
            .setReleaseStartExtension(extensionObject)
            .setEol(eol)
            .setReleaseSnapshots(releaseSnapshots) 
-           .setFlowInitContext(getFlowInitContext().getJGitFlowContext());
+           .setFlowInitContext(getFlowInitContext().getJGitFlowContext())
+           .setNoVerify(noVerifyRelease);
 
         try
         {

@@ -141,6 +141,12 @@ public class HotfixFinishMojo extends AbstractJGitFlowMojo
     @Parameter(defaultValue = "false", property = "consistentProjectVersions")
     protected boolean consistentProjectVersions = false;
 
+    /**
+     * If set to true, skip pre-commit and message hooks when merging.
+     */
+    @Parameter(defaultValue = "false", property = "noVerifyHotfix")
+    protected boolean noVerifyHotfix = false;
+
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException
     {
@@ -180,7 +186,8 @@ public class HotfixFinishMojo extends AbstractJGitFlowMojo
                 .setEol(eol)
            .setHotfixFinishExtension(extensionObject)
            .setFlowInitContext(getFlowInitContext().getJGitFlowContext())
-           .setConsistentProjectVersions(consistentProjectVersions);
+           .setConsistentProjectVersions(consistentProjectVersions)
+           .setNoVerify(noVerifyHotfix);
 
         try
         {

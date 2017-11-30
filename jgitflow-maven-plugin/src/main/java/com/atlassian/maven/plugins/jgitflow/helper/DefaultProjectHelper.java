@@ -92,7 +92,7 @@ public class DefaultProjectHelper extends AbstractLogEnabled implements ProjectH
     }
 
     @Override
-    public void commitAllPoms(Git git, List<MavenProject> reactorProjects, String message) throws MavenJGitFlowException
+    public void commitAllPoms(Git git, List<MavenProject> reactorProjects, String message, boolean noVerify) throws MavenJGitFlowException
     {
         String fullBranchName = branchHelper.getCurrentBranchName();
 
@@ -150,7 +150,7 @@ public class DefaultProjectHelper extends AbstractLogEnabled implements ProjectH
                     add.addFilepattern(pomPath);
                 }
                 add.call();
-                git.commit().setMessage(message).call();
+                git.commit().setNoVerify(noVerify).setMessage(message).call();
             }
         }
         catch (GitAPIException e)
