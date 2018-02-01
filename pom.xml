@@ -23,20 +23,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <parent>
-    <groupId>io.ultreia.maven</groupId>
-    <artifactId>pom</artifactId>
-    <version>2017.34</version>
-  </parent>
-
-  <groupId>io.ultreia.java4all.jgitflow</groupId>
+  <groupId>com.manamind.jgitflow</groupId>
   <artifactId>jgitflow-parent</artifactId>
   <version>1.0.0-rc-2-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>JGitFlow :: Pom</name>
   <description>The parent pom for the Jgit Flow project</description>
-  <url>https://ultreiaio.gitlab.io/jgit-flow</url>
+  <url>https://gitlab.com/oyvindwe/jgit-flow</url>
   <organization>
     <name>Atlassian</name>
     <url>http://www.atlassian.com/</url>
@@ -62,11 +56,15 @@
       <email>dev@tchemit.fr</email>
       <organization>Ultreia.io</organization>
       <organizationUrl>http://ultreia.io</organizationUrl>
-      <roles>
-        <role>lead</role>
-        <role>developer</role>
-      </roles>
       <timezone>Europe/Paris</timezone>
+    </developer>
+    <developer>
+      <id>omw</id>
+      <name>Øyvind Matheson Wergeland</name>
+      <email>omw@oms.no</email>
+      <organization>Oslo Market Solutions AS</organization>
+      <organizationUrl>https://oms.no</organizationUrl>
+      <timezone>Europe/Oslo</timezone>
     </developer>
   </developers>
 
@@ -90,8 +88,57 @@
   </distributionManagement>
 
   <properties>
+    <projectPath>oyvindwe/jgit-flow</projectPath>
 
-    <organizationId>ultreiaio</organizationId>
+    <!-- report plugins version -->
+    <changesPluginVersion>2.12.1</changesPluginVersion>
+    <projectInfoReportsPluginVersion>2.9</projectInfoReportsPluginVersion>
+    <changelogPluginVersion>2.3</changelogPluginVersion>
+    <jrxPluginVersion>2.5</jrxPluginVersion>
+    <sonarReportPluginVersion>0.1</sonarReportPluginVersion>
+
+    <!-- apache maven plugins version -->
+    <antRunPluginVersion>1.8</antRunPluginVersion>
+    <assemblyPluginVersion>3.1.0</assemblyPluginVersion>
+    <cleanPluginVersion>3.0.0</cleanPluginVersion>
+    <compilerPluginVersion>3.7.0</compilerPluginVersion>
+    <dependencyPluginVersion>3.0.1</dependencyPluginVersion>
+    <deployPluginVersion>2.8.2</deployPluginVersion>
+    <earPluginVersion>2.10.1</earPluginVersion>
+    <ejbPluginVersion>3.0.0</ejbPluginVersion>
+    <enforcerPluginVersion>3.0.0-M1</enforcerPluginVersion>
+    <gpgPluginVersion>1.6</gpgPluginVersion>
+    <installPluginVersion>2.5.2</installPluginVersion>
+    <invokerPluginVersion>3.0.1</invokerPluginVersion>
+    <jarPluginVersion>3.0.2</jarPluginVersion>
+    <jarSignerPluginVersion>1.4</jarSignerPluginVersion>
+    <javadocPluginVersion>3.0.0-M1</javadocPluginVersion>
+    <pluginPluginVersion>3.5</pluginPluginVersion>
+    <pmdPluginVersion>3.8</pmdPluginVersion>
+    <releasePluginVersion>2.5.3</releasePluginVersion>
+    <remoteResourcesPluginVersion>1.5</remoteResourcesPluginVersion>
+    <resourcesPluginVersion>3.0.2</resourcesPluginVersion>
+    <shadePluginVersion>3.1.0</shadePluginVersion>
+    <sitePluginVersion>3.6</sitePluginVersion>
+    <sourcePluginVersion>3.0.1</sourcePluginVersion>
+    <surefirePluginVersion>2.20.1</surefirePluginVersion>
+    <warPluginVersion>3.1.0</warPluginVersion>
+
+    <!-- codehaus mojo plugins -->
+    <buildHelperPluginVersion>3.0.0</buildHelperPluginVersion>
+    <buildNumberPluginVersion>1.4</buildNumberPluginVersion>
+    <animalSnifferPluginVersion>1.16</animalSnifferPluginVersion>
+    <coberturaPluginVersion>2.7</coberturaPluginVersion>
+    <execPluginVersion>1.6.0</execPluginVersion>
+    <findbugsPluginVersion>3.0.5</findbugsPluginVersion>
+    <l10nPluginVersion>1.0-alpha-2</l10nPluginVersion>
+    <licensePluginVersion>1.14</licensePluginVersion>
+    <sonarPluginVersion>3.3.0.603</sonarPluginVersion>
+    <tidyPluginVersion>1.0.0</tidyPluginVersion>
+    <versionsPluginVersion>2.5</versionsPluginVersion>
+    <wagonPluginVersion>1.0</wagonPluginVersion>
+
+    <organizationId>manamind</organizationId>
     <projectId>jgit-flow</projectId>
 
     <javaVersion>1.7</javaVersion>
@@ -105,7 +152,7 @@
 
     <!-- license header configuration -->
     <license.licenseName>apache_v2</license.licenseName>
-    <license.organizationName>Atlassian Pty, LTD, Ultreia.io</license.organizationName>
+    <license.organizationName>Atlassian Pty, LTD, Ultreia.io, Oslo Market Solutions AS</license.organizationName>
 
     <!-- Site configuration -->
     <locales>en</locales>
@@ -114,8 +161,8 @@
 
     <!--Gitlab configuration-->
     <gitlab.changesTitle>JGit Flow changelog</gitlab.changesTitle>
-    <gitlab.changesAuthor>Tony Chemit</gitlab.changesAuthor>
-    <gitlab.changesAuthorEmail>dev@tchemit.fr</gitlab.changesAuthorEmail>
+    <gitlab.changesAuthor>Øyvind Mathson wergeland</gitlab.changesAuthor>
+    <gitlab.changesAuthorEmail>omw@oms.no</gitlab.changesAuthorEmail>
     <gitlab.trackers>critical,bug,enhancement,support,documentation</gitlab.trackers>
 
     <maven.javadoc.failOnError>false</maven.javadoc.failOnError>
@@ -546,33 +593,6 @@
 
         </plugins>
       </reporting>
-
-      <build>
-
-        <plugins>
-
-          <plugin>
-            <groupId>io.ultreia.maven</groupId>
-            <artifactId>gitlab-maven-plugin</artifactId>
-            <inherited>false</inherited>
-            <executions>
-              <execution>
-                <inherited>false</inherited>
-                <goals>
-                  <goal>generate-changes</goal>
-                </goals>
-                <phase>pre-site</phase>
-              </execution>
-            </executions>
-          </plugin>
-
-        </plugins>
-
-      </build>
-
     </profile>
-
   </profiles>
-
-
 </project>

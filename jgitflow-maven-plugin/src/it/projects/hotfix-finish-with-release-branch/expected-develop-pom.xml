@@ -50,7 +50,7 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>io.ultreia.java4all.jgitflow</groupId>
+                <groupId>com.manamind.jgitflow</groupId>
                 <artifactId>jgitflow-maven-plugin</artifactId>
                 <version>@project.version@</version>
                 <configuration>

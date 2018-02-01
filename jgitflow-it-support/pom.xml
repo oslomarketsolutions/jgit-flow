@@ -23,7 +23,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>io.ultreia.java4all.jgitflow</groupId>
+    <groupId>com.manamind.jgitflow</groupId>
     <artifactId>jgitflow-parent</artifactId>
     <version>1.0.0-rc-2-SNAPSHOT</version>
   </parent>
@@ -34,12 +34,12 @@
 
   <dependencies>
     <dependency>
-      <groupId>io.ultreia.java4all.jgitflow</groupId>
+      <groupId>com.manamind.jgitflow</groupId>
       <artifactId>jgitflow-core</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>io.ultreia.java4all.jgitflow</groupId>
+      <groupId>com.manamind.jgitflow</groupId>
       <artifactId>jgitflow-maven-api</artifactId>
       <version>${project.version}</version>
     </dependency>
