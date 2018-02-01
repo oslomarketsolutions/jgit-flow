@@ -118,6 +118,12 @@ public class ReleaseStartMojo extends AbstractJGitFlowMojo
     @Parameter(defaultValue = "false", property = "noVerifyRelease")
     protected boolean noVerifyRelease = false;
 
+    /**
+     * If set to true, add fix level 0 to relase version.
+     */
+    @Parameter(defaultValue = "false", property = "addFixLevel")
+    protected boolean addFixLevel = false;
+
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException
     {
@@ -154,7 +160,8 @@ public class ReleaseStartMojo extends AbstractJGitFlowMojo
            .setEol(eol)
            .setReleaseSnapshots(releaseSnapshots) 
            .setFlowInitContext(getFlowInitContext().getJGitFlowContext())
-           .setNoVerify(noVerifyRelease);
+           .setNoVerify(noVerifyRelease)
+           .setAddFixLevel(addFixLevel);
 
         try
         {
