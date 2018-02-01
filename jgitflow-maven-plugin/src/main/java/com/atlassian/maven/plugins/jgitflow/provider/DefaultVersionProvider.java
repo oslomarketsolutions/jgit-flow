@@ -385,7 +385,7 @@ public class DefaultVersionProvider extends AbstractLogEnabled implements Versio
 
         if (VersionType.RELEASE.equals(versionType))
         {
-            suggestedVersion = info.getReleaseVersionString();
+            suggestedVersion = info.getReleaseVersionString(ctx.isAddFixLevel());
         }
         else if (VersionType.DEVELOPMENT.equals(versionType))
         {

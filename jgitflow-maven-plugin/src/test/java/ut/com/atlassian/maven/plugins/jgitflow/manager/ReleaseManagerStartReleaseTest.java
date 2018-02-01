@@ -580,4 +580,18 @@ public class ReleaseManagerStartReleaseTest extends AbstractFlowManagerTest
 
     }
 
+    @Test
+    public void releaseWithAddingFixLevelVersion() throws Exception
+    {
+        String projectName = "basic-pom-add-fixlevel-version";
+        List<MavenProject> projects = createReactorProjects("rewrite-for-release", projectName);
+        File projectRoot = projects.get(0).getBasedir();
+
+        ReleaseContext ctx = new ReleaseContext(projectRoot);
+
+        ctx.setInteractive(false).setNoTag(true).setReleaseBranchVersionSuffix("").setAddFixLevel(true);
+
+        basicReleaseRewriteTest(projectName, ctx);
+    }
+
 }

@@ -84,6 +84,7 @@ public class ReleaseContext
     private boolean releaseSnapshots;
     private boolean addScmCommentSuffixOnMerge;
     private boolean noVerify;
+    private boolean addFixLevel;
 
     public ReleaseContext(File baseDir)
     {
@@ -695,6 +696,15 @@ public class ReleaseContext
 
     public ReleaseContext setNoVerify(boolean noVerify) {
         this.noVerify = noVerify;
+        return this;
+    }
+
+    public boolean isAddFixLevel() {
+        return addFixLevel;
+    }
+
+    public ReleaseContext setAddFixLevel(boolean addFixLevel) {
+        this.addFixLevel = addFixLevel;
         return this;
     }
 }
