@@ -32,7 +32,7 @@
   </skin>
   <custom>
     <reflowSkin>
-      <protocolRelativeURLs>false</protocolRelativeURLs>
+      <protocolRelativeURLs>true</protocolRelativeURLs>
       <smoothScroll>true</smoothScroll>
       <theme>bootswatch-spacelab</theme>
       <highlightJs>true</highlightJs>
