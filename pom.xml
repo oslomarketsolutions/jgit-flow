@@ -830,7 +830,11 @@
                   <goal>sign</goal>
                 </goals>
                 <configuration>
-                  <gpgArguments>--charset utf-8</gpgArguments>
+                  <gpgArguments>
+                    <argument>--charset</argument>
+                    <argument>utf-8</argument>
+                  </gpgArguments>
+                  <useAgent>false</useAgent>
                 </configuration>
               </execution>
             </executions>
