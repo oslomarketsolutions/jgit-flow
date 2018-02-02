@@ -1,8 +1,8 @@
 # JGit-Flow
 
-**Current Version: 1.0-m5.1**
+**Current Version: 1.0.0-rc-1**
 
-[![Maven Central status](https://img.shields.io/maven-central/v/io.ultreia.jgitflow/jgitflow-parent.svg)](https://search.maven.org/#search%7Cga%7C1%7Cg%3A%22io.ultreia.jgitflow%22%20AND%20a%3A%22jgitflow-parent%22)
+[![Maven Central status](https://img.shields.io/maven-central/v/io.ultreia.java4all.jgitflow/jgitflow-parent.svg)](https://search.maven.org/#search%7Cga%7C1%7Cg%3A%22io.ultreia.java4all.jgitflow%22%20AND%20a%3A%22jgitflow-parent%22)
 [![build status](https://gitlab.com/ultreiaio/jgit-flow/badges/develop/build.svg)](https://gitlab.com/ultreiaio/jgit-flow/commits/develop)
 [![Apache License, Version 2.0](https://img.shields.io/badge/license-apache2-orange.svg)](http://www.apache.org/licenses/LICENSE-2.0.txt)
 

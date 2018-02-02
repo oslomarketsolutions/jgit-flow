@@ -23,9 +23,9 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>io.ultreia.java4all.jgitflow</groupId>
+    <groupId>com.manamind.jgitflow</groupId>
     <artifactId>jgitflow-parent</artifactId>
-    <version>1.0.0-rc-1</version>
+    <version>1.0.0</version>
   </parent>
 
   <artifactId>jgitflow-core</artifactId>
@@ -52,7 +52,7 @@
     <dependency>
       <groupId>org.apache.servicemix.bundles</groupId>
       <artifactId>org.apache.servicemix.bundles.jsch</artifactId>
-      <scope>runtime</scope>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>com.google.guava</groupId>

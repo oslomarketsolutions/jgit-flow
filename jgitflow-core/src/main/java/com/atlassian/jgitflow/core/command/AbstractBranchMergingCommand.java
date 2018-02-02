@@ -87,7 +87,10 @@ public abstract class AbstractBranchMergingCommand<C, T> extends AbstractGitFlow
                 mergeResult = git.merge().setSquash(true).include(localBranchRef).call();
                 if (mergeResult.getMergeStatus().isSuccessful())
                 {
-                    git.commit().setMessage(getScmMessagePrefix() + "squashing '" + branchToMerge + "' into '" + mergeTarget + "'" + getScmMessageSuffix()).call();
+                    git.commit()
+                        .setMessage(getScmMessagePrefix() + "squashing '" + branchToMerge + "' into '" + mergeTarget + "'" + getScmMessageSuffix())
+                        .setNoVerify(isNoVerify())
+                        .call();
                 }
                 this.forceDeleteBranch = true;
             }
@@ -97,17 +100,22 @@ public abstract class AbstractBranchMergingCommand<C, T> extends AbstractGitFlow
                 
                 // check if you want scmCommentSuffix/scmCommentPrefix in the comment (if either is set, it shuold be used for merge messages as well for consistency)
                 boolean isCustomScmMessage = (!StringUtils.isEmptyOrNull(getScmMessagePrefix())) || (!StringUtils.isEmptyOrNull(getScmMessageSuffix()));
-                
-                if(isCustomScmMessage) {
+
+                // MergeCommand does not support noVerify flag, so must disable commit in merge.
+                // JGit uses regular commit on merge that runs pre-commit hooks, but command line git merge does not?
+                boolean disableCommitInMerge = isCustomScmMessage || isNoVerify();
+                if(disableCommitInMerge) {
                   mergeCommand.setCommit(false);
                 }
                 
                 mergeResult = mergeCommand.call();
-                
 
-                if (mergeResult.getMergeStatus().isSuccessful() && (MergeCommand.FastForwardMode.FF.equals(ffMode) || isCustomScmMessage))
+                if (mergeResult.getMergeStatus().isSuccessful() && (MergeCommand.FastForwardMode.FF.equals(ffMode) || disableCommitInMerge))
                 {
-                    git.commit().setMessage(getScmMessagePrefix() + "merging '" + branchToMerge + "' into '" + mergeTarget + "'" + (isAddScmCommentSuffixOnMerge() ? getScmMessageSuffix() : "")).call();
+                    git.commit()
+                        .setMessage(getScmMessagePrefix() + "merging '" + branchToMerge + "' into '" + mergeTarget + "'" + (isAddScmCommentSuffixOnMerge() ? getScmMessageSuffix() : ""))
+                        .setNoVerify(isNoVerify())
+                        .call();
                 }
             }
 

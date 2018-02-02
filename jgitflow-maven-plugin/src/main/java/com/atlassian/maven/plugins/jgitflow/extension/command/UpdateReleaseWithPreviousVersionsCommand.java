@@ -90,7 +90,7 @@ public class UpdateReleaseWithPreviousVersionsCommand implements ExtensionComman
             List<MavenProject> releaseProjects = checkoutAndGetProjects.run(releaseBranchName).getProjects();
 
             pomUpdater.copyPomVersionsFromMap(versionCacheProvider.getCachedVersions(), releaseProjects);
-            projectHelper.commitAllPoms(git, releaseProjects, ctx.getScmCommentPrefix() + "Updating release poms back to pre merge state" + ctx.getScmCommentSuffix());
+            projectHelper.commitAllPoms(git, releaseProjects, ctx.getScmCommentPrefix() + "Updating release poms back to pre merge state" + ctx.getScmCommentSuffix(), ctx.isNoVerify());
 
             flow.git().checkout().setName(originalBranchName).call();
         }

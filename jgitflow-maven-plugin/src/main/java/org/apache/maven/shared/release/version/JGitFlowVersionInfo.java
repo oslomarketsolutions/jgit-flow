@@ -298,6 +298,10 @@ public class JGitFlowVersionInfo implements VersionInfo
         return baseVersion + Artifact.SNAPSHOT_VERSION;
     }
 
+    public String getReleaseVersionString(boolean addFixLevel) {
+        return getReleaseVersionString() + (addFixLevel ? ".0" : "");
+    }
+
     public String getReleaseVersionString()
     {
         String baseVersion = strVersion;

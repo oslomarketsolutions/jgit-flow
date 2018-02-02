@@ -43,5 +43,9 @@ public interface JGitFlowCommand
 
     boolean isPush();
 
+    Object setNoVerify(boolean noVerify);
+
+    boolean isNoVerify();
+
     String getBranchName();
 }

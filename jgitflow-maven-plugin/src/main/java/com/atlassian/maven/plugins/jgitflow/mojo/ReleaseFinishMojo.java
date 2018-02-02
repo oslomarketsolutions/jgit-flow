@@ -156,6 +156,12 @@ public class ReleaseFinishMojo extends AbstractJGitFlowMojo
     @Parameter(defaultValue = "false", property = "consistentProjectVersions")
     protected boolean consistentProjectVersions = false;
 
+    /**
+     * If set to true, skip pre-commit and message hooks when merging.
+     */
+    @Parameter(defaultValue = "false", property = "noVerifyRelease")
+    protected boolean noVerifyRelease = false;
+
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException
     {
@@ -197,7 +203,8 @@ public class ReleaseFinishMojo extends AbstractJGitFlowMojo
            .setReleaseFinishExtension(extensionObject)
            .setFlowInitContext(getFlowInitContext().getJGitFlowContext())
                 .setEol(eol)
-           .setConsistentProjectVersions(consistentProjectVersions);
+           .setConsistentProjectVersions(consistentProjectVersions)
+           .setNoVerify(noVerifyRelease);
 
         try
         {

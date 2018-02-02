@@ -70,6 +70,7 @@ public class UpdatePomsWithSnapshotsCommand implements ExtensionCommand
         VersionType versionType = null;
         String versionSuffix = "";
         String unprefixedBranchName = "";
+        boolean noVerify;
 
         try
         {
@@ -86,12 +87,14 @@ public class UpdatePomsWithSnapshotsCommand implements ExtensionCommand
                     versionType = VersionType.RELEASE;
                     versionSuffix = ctx.getReleaseBranchVersionSuffix();
                     doSnapshots = ctx.isReleaseSnapshots();
+                    noVerify = ctx.isNoVerify();
                     break;
 
                 case HOTFIX:
                     cacheKey = ProjectCacheKey.HOTFIX_LABEL;
                     versionType = VersionType.HOTFIX;
                     versionSuffix = "";
+                    noVerify = ctx.isNoVerify();
                     break;
 
                 default:
@@ -114,7 +117,7 @@ public class UpdatePomsWithSnapshotsCommand implements ExtensionCommand
                 pomUpdater.removeSnapshotFromPomVersionsKeepSuffix(cacheKey, versionSuffix, branchProjects);
             }
             
-            projectHelper.commitAllPoms(flow.git(), branchProjects, ctx.getScmCommentPrefix() + "updating poms for " + unprefixedBranchName + " branch with snapshot versions" + ctx.getScmCommentSuffix());
+            projectHelper.commitAllPoms(flow.git(), branchProjects, ctx.getScmCommentPrefix() + "updating poms for " + unprefixedBranchName + " branch with snapshot versions" + ctx.getScmCommentSuffix(), noVerify);
         }
         catch (Exception e)
         {

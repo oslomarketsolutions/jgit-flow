@@ -1,11 +1,11 @@
 # JGit Flow changelog
 
  * Author [Tony Chemit](mailto:dev@tchemit.fr)
- * Last generated at 2017-08-18 22:20.
+ * Last generated at 2017-08-18 22:36.
 
 ## Version [1.0.0-rc-1](https://gitlab.com/ultreiaio/jgit-flow/milestones/1)
 
-**Closed at 2017-08-31.**
+**Closed at 2017-08-18.**
 
 
 ### Issues

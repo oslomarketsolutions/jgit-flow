@@ -22,20 +22,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <parent>
-    <groupId>io.ultreia.maven</groupId>
-    <artifactId>pom</artifactId>
-    <version>20</version>
-  </parent>
-
-  <groupId>io.ultreia.java4all.jgitflow</groupId>
+  <groupId>com.manamind.jgitflow</groupId>
   <artifactId>jgitflow-parent</artifactId>
-  <version>1.0.0-rc-1</version>
+  <version>1.0.0</version>
   <packaging>pom</packaging>
 
   <name>JGitFlow :: Pom</name>
   <description>The parent pom for the Jgit Flow project</description>
-  <url>https://ultreiaio.gitlab.io/jgit-flow</url>
+  <url>https://gitlab.com/oyvindwe/jgit-flow</url>
   <organization>
     <name>Atlassian</name>
     <url>http://www.atlassian.com/</url>
@@ -48,6 +42,7 @@
       <comments>A business-friendly OSS license</comments>
     </license>
   </licenses>
+  <inceptionYear>2013</inceptionYear>
 
   <developers>
     <developer>
@@ -61,11 +56,15 @@
       <email>dev@tchemit.fr</email>
       <organization>Ultreia.io</organization>
       <organizationUrl>http://ultreia.io</organizationUrl>
-      <roles>
-        <role>lead</role>
-        <role>developer</role>
-      </roles>
       <timezone>Europe/Paris</timezone>
+    </developer>
+    <developer>
+      <id>omw</id>
+      <name>Øyvind Matheson Wergeland</name>
+      <email>omw@oms.no</email>
+      <organization>Oslo Market Solutions AS</organization>
+      <organizationUrl>https://oms.no</organizationUrl>
+      <timezone>Europe/Oslo</timezone>
     </developer>
   </developers>
 
@@ -77,35 +76,104 @@
   </modules>
 
   <scm>
-    <url>https://gitlab.com/${organizationId}/${projectId}</url>
-    <connection>scm:git:git@gitlab.com:${organizationId}/${projectId}.git</connection>
-    <developerConnection>scm:git:ssh://git@gitlab.com:${organizationId}/${projectId}.git</developerConnection>
+    <url>https://gitlab.com/${projectPath}</url>
+    <connection>scm:git:git@gitlab.com:${projectPath}.git</connection>
+    <developerConnection>scm:git:ssh://git@gitlab.com:${projectPath}.git</developerConnection>
   </scm>
+  <issueManagement>
+    <system>gitlab</system>
+    <url>https://gitlab.com/${projectPath}/issues</url>
+  </issueManagement>
   <distributionManagement>
+    <snapshotRepository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
+    <repository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+    </repository>
     <site>
       <id>gitlab.com</id>
-      <url>scm:git:https://git@gitlab.com/${organizationId}/${projectId}.git</url>
+      <url>scm:git:https://git@gitlab.com/${projectPath}.git</url>
     </site>
   </distributionManagement>
 
   <properties>
+    <projectPath>oyvindwe/jgit-flow</projectPath>
+    <stageId>oyvindwe</stageId>
 
-    <organizationId>ultreiaio</organizationId>
+    <!-- default encoding -->
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+    <!-- report plugins version -->
+    <changesPluginVersion>2.12.1</changesPluginVersion>
+    <projectInfoReportsPluginVersion>2.9</projectInfoReportsPluginVersion>
+    <changelogPluginVersion>2.3</changelogPluginVersion>
+    <jrxPluginVersion>2.5</jrxPluginVersion>
+    <sonarReportPluginVersion>0.1</sonarReportPluginVersion>
+
+    <!-- apache maven plugins version -->
+    <antRunPluginVersion>1.8</antRunPluginVersion>
+    <assemblyPluginVersion>3.1.0</assemblyPluginVersion>
+    <cleanPluginVersion>3.0.0</cleanPluginVersion>
+    <compilerPluginVersion>3.7.0</compilerPluginVersion>
+    <dependencyPluginVersion>3.0.1</dependencyPluginVersion>
+    <deployPluginVersion>2.8.2</deployPluginVersion>
+    <enforcerPluginVersion>3.0.0-M1</enforcerPluginVersion>
+    <gpgPluginVersion>1.6</gpgPluginVersion>
+    <installPluginVersion>2.5.2</installPluginVersion>
+    <invokerPluginVersion>3.0.1</invokerPluginVersion>
+    <jarPluginVersion>3.0.2</jarPluginVersion>
+    <jarSignerPluginVersion>1.4</jarSignerPluginVersion>
+    <javadocPluginVersion>3.0.0-M1</javadocPluginVersion>
+    <pluginPluginVersion>3.5</pluginPluginVersion>
+    <pmdPluginVersion>3.8</pmdPluginVersion>
+    <releasePluginVersion>2.5.3</releasePluginVersion>
+    <remoteResourcesPluginVersion>1.5</remoteResourcesPluginVersion>
+    <resourcesPluginVersion>3.0.2</resourcesPluginVersion>
+    <shadePluginVersion>3.1.0</shadePluginVersion>
+    <sitePluginVersion>3.6</sitePluginVersion>
+    <sourcePluginVersion>3.0.1</sourcePluginVersion>
+    <surefirePluginVersion>2.20.1</surefirePluginVersion>
+
+    <!-- codehaus mojo plugins -->
+    <buildHelperPluginVersion>3.0.0</buildHelperPluginVersion>
+    <buildNumberPluginVersion>1.4</buildNumberPluginVersion>
+    <animalSnifferPluginVersion>1.16</animalSnifferPluginVersion>
+    <coberturaPluginVersion>2.7</coberturaPluginVersion>
+    <execPluginVersion>1.6.0</execPluginVersion>
+    <findbugsPluginVersion>3.0.5</findbugsPluginVersion>
+    <l10nPluginVersion>1.0-alpha-2</l10nPluginVersion>
+    <licensePluginVersion>1.14</licensePluginVersion>
+    <sonarPluginVersion>3.3.0.603</sonarPluginVersion>
+    <tidyPluginVersion>1.0.0</tidyPluginVersion>
+    <versionsPluginVersion>2.5</versionsPluginVersion>
+    <wagonPluginVersion>1.0</wagonPluginVersion>
+
+    <!-- codehaus plexus plugins -->
+    <plexusComponentMetadataPluginVersion>1.7.1</plexusComponentMetadataPluginVersion>
+
+    <!-- nuiton plugins -->
+    <helperPluginVersion>2.3.2</helperPluginVersion>
+
+    <organizationId>manamind</organizationId>
     <projectId>jgit-flow</projectId>
 
     <javaVersion>1.7</javaVersion>
     <signatureArtifactId>java17</signatureArtifactId>
     <signatureVersion>1.0</signatureVersion>
+    <jgitflowPluginVersion>1.0.0-rc-1</jgitflowPluginVersion>
 
     <maven.version>2.2.1</maven.version>
     <!--<mavenVersion>3.0.5</mavenVersion>-->
     <jsch.agent.version>0.0.9</jsch.agent.version>
     <slf4j.version>1.7.25</slf4j.version>
-    <jgitflowPluginVersion>1.0-m5.1</jgitflowPluginVersion>
 
     <!-- license header configuration -->
     <license.licenseName>apache_v2</license.licenseName>
-    <license.organizationName>Atlassian Pty, LTD, Ultreia.io</license.organizationName>
+    <license.organizationName>Atlassian Pty, LTD, Ultreia.io, Oslo Market Solutions AS</license.organizationName>
 
     <!-- Site configuration -->
     <locales>en</locales>
@@ -114,11 +182,11 @@
 
     <!--Gitlab configuration-->
     <gitlab.changesTitle>JGit Flow changelog</gitlab.changesTitle>
-    <gitlab.changesAuthor>Tony Chemit</gitlab.changesAuthor>
-    <gitlab.changesAuthorEmail>dev@tchemit.fr</gitlab.changesAuthorEmail>
+    <gitlab.changesAuthor>Øyvind Matheson Wergeland</gitlab.changesAuthor>
+    <gitlab.changesAuthorEmail>omw@oms.no</gitlab.changesAuthorEmail>
     <gitlab.trackers>critical,bug,enhancement,support,documentation</gitlab.trackers>
 
-    <javadoc.failOnError>false</javadoc.failOnError>
+    <maven.javadoc.failOnError>false</maven.javadoc.failOnError>
 
     <!--deploy all-->
     <maven.deploy.skip>false</maven.deploy.skip>
@@ -173,6 +241,21 @@
         <version>20.0</version>
       </dependency>
       <dependency>
+        <groupId>org.apache.maven.scm</groupId>
+        <artifactId>maven-scm-api</artifactId>
+        <version>1.9.4</version>
+      </dependency>
+      <dependency>
+        <groupId>jaxen</groupId>
+        <artifactId>jaxen</artifactId>
+        <version>1.1-beta-8</version>
+      </dependency>
+      <dependency>
+        <groupId>classworlds</groupId>
+        <artifactId>classworlds</artifactId>
+        <version>1.1</version>
+      </dependency>
+      <dependency>
         <groupId>org.apache.maven</groupId>
         <artifactId>maven-core</artifactId>
         <version>${maven.version}</version>
@@ -188,6 +271,10 @@
           <exclusion>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-nop</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>org.apache.maven.wagon</groupId>
+            <artifactId>wagon-webdav-jackrabbit</artifactId>
           </exclusion>
         </exclusions>
       </dependency>
@@ -225,6 +312,14 @@
             <groupId>org.apache.maven.scm</groupId>
             <artifactId>maven-scm-providers-standard</artifactId>
           </exclusion>
+          <exclusion>
+            <groupId>jaxen</groupId>
+            <artifactId>jaxen</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>org.jdom</groupId>
+            <artifactId>jdom</artifactId>
+          </exclusion>
         </exclusions>
       </dependency>
       <dependency>
@@ -243,6 +338,11 @@
         <groupId>org.codehaus.plexus</groupId>
         <artifactId>plexus-utils</artifactId>
         <version>3.1.0</version>
+      </dependency>
+      <dependency>
+        <groupId>org.codehaus.plexus</groupId>
+        <artifactId>plexus-interpolation</artifactId>
+        <version>1.24</version>
       </dependency>
       <dependency>
         <groupId>org.codehaus.plexus</groupId>
@@ -273,6 +373,11 @@
         <groupId>commons-lang</groupId>
         <artifactId>commons-lang</artifactId>
         <version>2.6</version>
+      </dependency>
+      <dependency>
+        <groupId>commons-codec</groupId>
+        <artifactId>commons-codec</artifactId>
+        <version>1.9</version>
       </dependency>
       <dependency>
         <groupId>org.apache.maven</groupId>
@@ -365,13 +470,12 @@
     </resources>
     <pluginManagement>
       <plugins>
+
+        <!-- Plugins from apache -->
+
         <plugin>
           <artifactId>maven-site-plugin</artifactId>
           <version>3.3</version>
-          <configuration>
-            <topSiteURL>scm:git:https://git@gitlab.com/${organizationId}/${projectId}.git</topSiteURL>
-            <stagingDirectory>${user.dir}/target/staging</stagingDirectory>
-          </configuration>
           <dependencies>
             <dependency>
               <groupId>lt.velykis.maven.skins</groupId>
@@ -384,12 +488,6 @@
               <version>1.7</version>
             </dependency>
           </dependencies>
-        </plugin>
-        <plugin>
-          <artifactId>maven-scm-publish-plugin</artifactId>
-          <configuration>
-            <scmBranch>pages</scmBranch>
-          </configuration>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -406,10 +504,122 @@
           </configuration>
         </plugin>
 
+        <plugin>
+          <artifactId>maven-antrun-plugin</artifactId>
+          <version>${antRunPluginVersion}</version>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-assembly-plugin</artifactId>
+          <version>${assemblyPluginVersion}</version>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>${cleanPluginVersion}</version>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>${compilerPluginVersion}</version>
+          <configuration>
+            <compilerArgs>
+              <arg>-Xlint:unchecked</arg>
+            </compilerArgs>
+          </configuration>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-dependency-plugin</artifactId>
+          <version>${dependencyPluginVersion}</version>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>${deployPluginVersion}</version>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-enforcer-plugin</artifactId>
+          <version>${enforcerPluginVersion}</version>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-gpg-plugin</artifactId>
+          <version>${gpgPluginVersion}</version>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>${installPluginVersion}</version>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-invoker-plugin</artifactId>
+          <version>${invokerPluginVersion}</version>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-jarsigner-plugin</artifactId>
+          <version>${jarSignerPluginVersion}</version>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-plugin-plugin</artifactId>
+          <version>${pluginPluginVersion}</version>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-pmd-plugin</artifactId>
+          <version>${pmdPluginVersion}</version>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-release-plugin</artifactId>
+          <version>${releasePluginVersion}</version>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-remote-resources-plugin</artifactId>
+          <version>${remoteResourcesPluginVersion}</version>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>${resourcesPluginVersion}</version>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-shade-plugin</artifactId>
+          <version>${shadePluginVersion}</version>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-source-plugin</artifactId>
+          <version>${sourcePluginVersion}</version>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>${jarPluginVersion}</version>
+          <inherited>true</inherited>
+          <configuration>
+            <archive>
+              <manifest>
+                <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+              </manifest>
+              <manifestEntries>
+                <url>${project.url}</url>
+              </manifestEntries>
+            </archive>
+          </configuration>
+        </plugin>
+
         <!-- Temporary workaround for jira.codehaus.org/browse/MPLUGIN-244 -->
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-javadoc-plugin</artifactId>
+          <version>${javadocPluginVersion}</version>
           <configuration>
             <additionalparam>-Xdoclint:none</additionalparam>
             <quiet>true</quiet>
@@ -422,6 +632,75 @@
           <version>2.3.7</version>
           <extensions>true</extensions>
         </plugin>
+
+
+        <!-- Plugins from codehaus mojo -->
+
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>animal-sniffer-maven-plugin</artifactId>
+          <version>${animalSnifferPluginVersion}</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>build-helper-maven-plugin</artifactId>
+          <version>${buildHelperPluginVersion}</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>license-maven-plugin</artifactId>
+          <version>${licensePluginVersion}</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.codehaus.plexus</groupId>
+          <artifactId>plexus-component-metadata</artifactId>
+          <version>${plexusComponentMetadataPluginVersion}</version>
+        </plugin>
+
+        <!-- Plugins from nuiton -->
+        <plugin>
+          <groupId>org.nuiton</groupId>
+          <artifactId>helper-maven-plugin</artifactId>
+          <version>${helperPluginVersion}</version>
+        </plugin>
+
+        <plugin>
+          <groupId>io.ultreia.java4all.jgitflow</groupId>
+          <artifactId>jgitflow-maven-plugin</artifactId>
+          <version>${jgitflowPluginVersion}</version>
+          <configuration>
+            <autoVersionSubmodules>true</autoVersionSubmodules>
+            <addScmCommentSuffixOnMerge>false</addScmCommentSuffixOnMerge>
+          </configuration>
+          <executions>
+            <execution>
+              <id>default-cli</id>
+              <goals>
+                <goal>release-finish</goal>
+              </goals>
+              <configuration>
+                <pushReleases>true</pushReleases>
+                <enableSshAgent>true</enableSshAgent>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
+
+        <plugin>
+          <groupId>org.sonatype.plugins</groupId>
+          <artifactId>nexus-staging-maven-plugin</artifactId>
+          <version>${nexusStaginPluginVersion}</version>
+          <extensions>true</extensions>
+          <configuration>
+            <serverId>ossrh</serverId>
+            <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+            <autoReleaseAfterClose>true</autoReleaseAfterClose>
+          </configuration>
+        </plugin>
+
       </plugins>
     </pluginManagement>
 
@@ -472,7 +751,7 @@
             <inherited>false</inherited>
             <configuration>
               <issueLinkTemplatePerSystem>
-                <gitlab>https://gitlab.com/${organizationId}/${projectId}/issues/%ISSUE%</gitlab>
+                <gitlab>https://gitlab.com/${projectPath}/issues/%ISSUE%</gitlab>
               </issueLinkTemplatePerSystem>
               <xmlPath>${project.build.directory}/generated-site/changes.xml</xmlPath>
             </configuration>
@@ -519,22 +798,60 @@
 
         </plugins>
       </reporting>
+    </profile>
+
+
+    <!-- perform only on a release stage when using the maven-release-plugin -->
+    <profile>
+      <id>license-profile</id>
+      <activation>
+        <property>
+          <name>performRelease</name>
+          <value>true</value>
+        </property>
+      </activation>
 
       <build>
 
+        <defaultGoal>generate-resources</defaultGoal>
+
         <plugins>
 
+          <!-- add license and third-party files to build -->
           <plugin>
-            <groupId>io.ultreia.maven</groupId>
-            <artifactId>gitlab-maven-plugin</artifactId>
-            <inherited>false</inherited>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>license-maven-plugin</artifactId>
             <executions>
               <execution>
-                <inherited>false</inherited>
+                <id>attach-licenses</id>
                 <goals>
-                  <goal>generate-changes</goal>
+                  <goal>update-project-license</goal>
+                  <goal>add-third-party</goal>
                 </goals>
-                <phase>pre-site</phase>
+                <configuration>
+                  <licenseMerges>
+                    <licenseMerge>
+                      The Apache Software License, Version 2.0|Apache License, Version 2.0|Apache License V2.0|Apache
+                      2|ASF 2.0|apache-2.0|Apache Public License 2.0
+                    </licenseMerge>
+                    <licenseMerge>BSD License|BSD license|BSD</licenseMerge>
+                    <licenseMerge>MIT License|MIT license|MIT</licenseMerge>
+                    <licenseMerge>
+                      Lesser General Public License (LPGL) v 2.1|GNU Lesser General Public License, 2.1|LGPL 2.1
+                    </licenseMerge>
+                    <licenseMerge>
+                      Lesser General Public License (LPGL)|GNU Lesser General Public License|GNU LESSER GENERAL PUBLIC
+                      LICENSE|LGPL|lgpl
+                    </licenseMerge>
+                    <licenseMerge>
+                      COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) Version 1.0|Common Development and Distribution
+                      License (CDDL) v1.0
+                    </licenseMerge>
+                    <licenseMerge>Indiana University Extreme! Lab Software License, version 1.1.1|Indiana University
+                      Extreme! Lab Software License
+                    </licenseMerge>
+                  </licenseMerges>
+                </configuration>
               </execution>
             </executions>
           </plugin>
@@ -542,10 +859,340 @@
         </plugins>
 
       </build>
+    </profile>
 
+    <!-- perform only on a release to do quality checks on release -->
+    <profile>
+      <id>release-quality-profile</id>
+      <activation>
+        <property>
+          <name>performRelease</name>
+          <value>true</value>
+        </property>
+      </activation>
+
+      <build>
+        <plugins>
+
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>animal-sniffer-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>check</goal>
+                </goals>
+                <configuration>
+                  <signature>
+                    <groupId>org.codehaus.mojo.signature</groupId>
+                    <artifactId>${signatureArtifactId}</artifactId>
+                    <version>${signatureVersion}</version>
+                  </signature>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+
+          <plugin>
+            <artifactId>maven-enforcer-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>check-project</id>
+                <goals>
+                  <goal>enforce</goal>
+                </goals>
+                <phase>validate</phase>
+                <configuration>
+                  <rules>
+                    <requireFilesExist>
+                      <files>
+                        <file>LICENSE.txt</file>
+                        <file>README.md</file>
+                      </files>
+                    </requireFilesExist>
+                    <requireProperty>
+                      <property>organizationId</property>
+                      <message>"organizationId property must be specified."</message>
+                      <regex>.+$</regex>
+                      <regexMessage>"organizationId property can not be empty."</regexMessage>
+                    </requireProperty>
+                    <requireProperty>
+                      <property>projectId</property>
+                      <message>"projectId property must be specified."</message>
+                      <regex>.+$</regex>
+                      <regexMessage>"projectId property can not be empty."</regexMessage>
+                    </requireProperty>
+                    <requireProperty>
+                      <property>stageId</property>
+                      <message>"stageId property must be specified."</message>
+                      <regex>.+$</regex>
+                      <regexMessage>"stageId property can not be empty."</regexMessage>
+                    </requireProperty>
+                    <requireMavenVersion>
+                      <version>${maven.version}</version>
+                    </requireMavenVersion>
+                    <dependencyConvergence />
+                    <bannedDependencies>
+                      <excludes>
+                        <exclude>
+                          org.codehaus.plexus:plexus-component-api
+                        </exclude>
+                      </excludes>
+                      <message>
+                        The new containers are not supported. You
+                        probably added a dependency that is missing the
+                        exclusions.
+                      </message>
+                    </bannedDependencies>
+                    <enforceBytecodeVersion>
+                      <maxJdkVersion>${javaVersion}</maxJdkVersion>
+                    </enforceBytecodeVersion>
+                    <banDuplicateClasses>
+                      <findAllDuplicates>true</findAllDuplicates>
+                    </banDuplicateClasses>
+                  </rules>
+                  <fail>true</fail>
+                </configuration>
+              </execution>
+            </executions>
+            <dependencies>
+              <dependency>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>extra-enforcer-rules</artifactId>
+                <version>1.0-beta-4</version>
+              </dependency>
+            </dependencies>
+          </plugin>
+
+        </plugins>
+      </build>
+    </profile>
+
+    <profile>
+      <id>release-sign-artifacts</id>
+      <activation>
+        <property>
+          <name>performRelease</name>
+          <value>true</value>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.nuiton</groupId>
+            <artifactId>helper-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>get-pgp-pass-phrase</id>
+                <goals>
+                  <goal>share-server-secret</goal>
+                </goals>
+                <phase>verify</phase>
+                <configuration>
+                  <serverId>omw-gpg-signer</serverId>
+                  <usernameOut>gpg.keyname</usernameOut>
+                  <passwordOut>gpg.passphrase</passwordOut>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+                <configuration>
+                  <gpgArguments>
+                    <argument>--charset</argument>
+                    <argument>utf-8</argument>
+                  </gpgArguments>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <!-- This profile update license stuff with new goal update-file-header -->
+    <profile>
+      <id>update-file-header</id>
+      <activation>
+        <property>
+          <name>performRelease</name>
+          <value>true</value>
+        </property>
+      </activation>
+
+      <properties>
+        <license.descriptor>src/license/project.xml</license.descriptor>
+        <license.excludes>**/ftl/*.ftl,**/i18n/*.properties,**/THIRD-PARTY.properties,**/*.sh</license.excludes>
+      </properties>
+      <build>
+        <defaultGoal>process-resources</defaultGoal>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>license-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>update-file-header</id>
+                <goals>
+                  <goal>update-file-header</goal>
+                </goals>
+                <phase>process-resources</phase>
+              </execution>
+              <execution>
+                <id>update-pom-header</id>
+                <goals>
+                  <goal>update-file-header</goal>
+                </goals>
+                <configuration>
+                  <roots>
+                    <root>${project.basedir}</root>
+                  </roots>
+                  <includes>
+                    <include>pom.xml</include>
+                  </includes>
+                </configuration>
+                <phase>process-resources</phase>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <profile>
+      <id>analyze-dependencies</id>
+      <activation>
+        <property>
+          <name>performRelease</name>
+          <value>true</value>
+        </property>
+      </activation>
+      <build>
+        <defaultGoal>verify</defaultGoal>
+        <plugins>
+          <plugin>
+            <artifactId>maven-dependency-plugin</artifactId>
+            <inherited>true</inherited>
+            <executions>
+              <execution>
+                <id>analyze</id>
+                <goals>
+                  <goal>analyze-only</goal>
+                </goals>
+                <configuration>
+                  <verbose>true</verbose>
+                  <failOnWarning>true</failOnWarning>
+                  <ignoreNonCompile>true</ignoreNonCompile>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <profile>
+      <id>maven-3</id>
+      <activation>
+        <file>
+          <!--  This employs that the basedir expression is only recognized by Maven 3.x (see MNG-2363) -->
+          <exists>${basedir}</exists>
+        </file>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-site-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>attach-descriptor</id>
+                <goals>
+                  <goal>attach-descriptor</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <profile>
+      <id>update-changelog</id>
+      <build>
+        <defaultGoal>generate-resources</defaultGoal>
+        <plugins>
+          <plugin>
+            <groupId>io.ultreia.maven</groupId>
+            <artifactId>gitlab-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>generate-changelog</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <profile>
+      <id>update-staging-changelog</id>
+      <build>
+        <defaultGoal>generate-resources</defaultGoal>
+        <plugins>
+          <plugin>
+            <groupId>io.ultreia.maven</groupId>
+            <artifactId>gitlab-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <goals>
+                  <!--suppress MavenModelInspection -->
+                  <goal>generate-staging-changelog</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <!-- Profile to generate a multi module site (you need to place file .mvn/simple-site fil in your project) -->
+    <profile>
+      <id>multi-module-site-profile</id>
+      <activation>
+        <file>
+          <exists>${basedir}/.mvn/multi-module-site</exists>
+        </file>
+      </activation>
+      <build>
+        <pluginManagement>
+          <plugins>
+            <plugin>
+              <artifactId>maven-site-plugin</artifactId>
+              <configuration>
+                <topSiteURL>scm:git:https://git@gitlab.com/${projectPath}.git</topSiteURL>
+                <stagingDirectory>${user.dir}/target/staging</stagingDirectory>
+              </configuration>
+            </plugin>
+            <plugin>
+              <artifactId>maven-scm-publish-plugin</artifactId>
+              <configuration>
+                <scmBranch>pages</scmBranch>
+              </configuration>
+            </plugin>
+          </plugins>
+        </pluginManagement>
+      </build>
     </profile>
 
   </profiles>
-
-
 </project>

@@ -32,16 +32,15 @@
   </skin>
   <custom>
     <reflowSkin>
-      <protocolRelativeURLs>false</protocolRelativeURLs>
-      <smoothScroll>false</smoothScroll>
-      <theme>default</theme>
+      <protocolRelativeURLs>true</protocolRelativeURLs>
+      <smoothScroll>true</smoothScroll>
+      <theme>bootswatch-spacelab</theme>
       <highlightJs>true</highlightJs>
-      <highlightJsTheme>default</highlightJsTheme>
-      <imgLightbox>false</imgLightbox>
-      <!--<absoluteResourceURL>http://jgitflow.bitbucket.org</absoluteResourceURL>-->
+      <imgLightbox>true</imgLightbox>
+      <absoluteResourceURL>https://ultreiaio.gitlab.io/jgit-flow</absoluteResourceURL>
       <brand>
         <!-- Reflow Maven Skin, but with "Reflow" highlighted -->
-        <name><![CDATA[<span class="color-highlight">JGit Flow</span> Maven Plugin]]></name>
+        <name><![CDATA[<span class="color-highlight">JGit Flow</span>]]></name>
         <href>index.html</href>
       </brand>
       <slogan>A maven plugin that allows you to use Git Flow and Maven Together!</slogan>
@@ -76,9 +75,7 @@
 
   <bannerLeft>
     <!-- Reflow Maven Skin, but with "Reflow" highlighted -->
-    <name><![CDATA[
-              <span class="color-highlight">JGit Flow</span>
-             ]]></name>
+    <name><![CDATA[ <span class="color-highlight">JGit Flow</span>]]></name>
     <href>index.html</href>
   </bannerLeft>
   <body>
