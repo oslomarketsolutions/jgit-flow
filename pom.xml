@@ -42,6 +42,7 @@
       <comments>A business-friendly OSS license</comments>
     </license>
   </licenses>
+  <inceptionYear>2013</inceptionYear>
 
   <developers>
     <developer>
@@ -84,6 +85,14 @@
     <url>https://gitlab.com/${projectPath}/issues</url>
   </issueManagement>
   <distributionManagement>
+    <snapshotRepository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
+    <repository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+    </repository>
     <site>
       <id>gitlab.com</id>
       <url>scm:git:https://git@gitlab.com/${projectPath}.git</url>
@@ -93,6 +102,10 @@
   <properties>
     <projectPath>oyvindwe/jgit-flow</projectPath>
     <stageId>oyvindwe</stageId>
+
+    <!-- default encoding -->
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
     <!-- report plugins version -->
     <changesPluginVersion>2.12.1</changesPluginVersion>
@@ -108,8 +121,6 @@
     <compilerPluginVersion>3.7.0</compilerPluginVersion>
     <dependencyPluginVersion>3.0.1</dependencyPluginVersion>
     <deployPluginVersion>2.8.2</deployPluginVersion>
-    <earPluginVersion>2.10.1</earPluginVersion>
-    <ejbPluginVersion>3.0.0</ejbPluginVersion>
     <enforcerPluginVersion>3.0.0-M1</enforcerPluginVersion>
     <gpgPluginVersion>1.6</gpgPluginVersion>
     <installPluginVersion>2.5.2</installPluginVersion>
@@ -126,7 +137,6 @@
     <sitePluginVersion>3.6</sitePluginVersion>
     <sourcePluginVersion>3.0.1</sourcePluginVersion>
     <surefirePluginVersion>2.20.1</surefirePluginVersion>
-    <warPluginVersion>3.1.0</warPluginVersion>
 
     <!-- codehaus mojo plugins -->
     <buildHelperPluginVersion>3.0.0</buildHelperPluginVersion>
@@ -141,6 +151,12 @@
     <tidyPluginVersion>1.0.0</tidyPluginVersion>
     <versionsPluginVersion>2.5</versionsPluginVersion>
     <wagonPluginVersion>1.0</wagonPluginVersion>
+
+    <!-- codehaus plexus plugins -->
+    <plexusComponentMetadataPluginVersion>1.7.1</plexusComponentMetadataPluginVersion>
+
+    <!-- nuiton plugins -->
+    <helperPluginVersion>2.3.2</helperPluginVersion>
 
     <organizationId>manamind</organizationId>
     <projectId>jgit-flow</projectId>
@@ -166,7 +182,7 @@
 
     <!--Gitlab configuration-->
     <gitlab.changesTitle>JGit Flow changelog</gitlab.changesTitle>
-    <gitlab.changesAuthor>Øyvind Mathson wergeland</gitlab.changesAuthor>
+    <gitlab.changesAuthor>Øyvind Matheson Wergeland</gitlab.changesAuthor>
     <gitlab.changesAuthorEmail>omw@oms.no</gitlab.changesAuthorEmail>
     <gitlab.trackers>critical,bug,enhancement,support,documentation</gitlab.trackers>
 
@@ -454,6 +470,9 @@
     </resources>
     <pluginManagement>
       <plugins>
+
+        <!-- Plugins from apache -->
+
         <plugin>
           <artifactId>maven-site-plugin</artifactId>
           <version>3.3</version>
@@ -485,10 +504,122 @@
           </configuration>
         </plugin>
 
+        <plugin>
+          <artifactId>maven-antrun-plugin</artifactId>
+          <version>${antRunPluginVersion}</version>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-assembly-plugin</artifactId>
+          <version>${assemblyPluginVersion}</version>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>${cleanPluginVersion}</version>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>${compilerPluginVersion}</version>
+          <configuration>
+            <compilerArgs>
+              <arg>-Xlint:unchecked</arg>
+            </compilerArgs>
+          </configuration>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-dependency-plugin</artifactId>
+          <version>${dependencyPluginVersion}</version>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>${deployPluginVersion}</version>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-enforcer-plugin</artifactId>
+          <version>${enforcerPluginVersion}</version>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-gpg-plugin</artifactId>
+          <version>${gpgPluginVersion}</version>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>${installPluginVersion}</version>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-invoker-plugin</artifactId>
+          <version>${invokerPluginVersion}</version>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-jarsigner-plugin</artifactId>
+          <version>${jarSignerPluginVersion}</version>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-plugin-plugin</artifactId>
+          <version>${pluginPluginVersion}</version>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-pmd-plugin</artifactId>
+          <version>${pmdPluginVersion}</version>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-release-plugin</artifactId>
+          <version>${releasePluginVersion}</version>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-remote-resources-plugin</artifactId>
+          <version>${remoteResourcesPluginVersion}</version>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>${resourcesPluginVersion}</version>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-shade-plugin</artifactId>
+          <version>${shadePluginVersion}</version>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-source-plugin</artifactId>
+          <version>${sourcePluginVersion}</version>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>${jarPluginVersion}</version>
+          <inherited>true</inherited>
+          <configuration>
+            <archive>
+              <manifest>
+                <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+              </manifest>
+              <manifestEntries>
+                <url>${project.url}</url>
+              </manifestEntries>
+            </archive>
+          </configuration>
+        </plugin>
+
         <!-- Temporary workaround for jira.codehaus.org/browse/MPLUGIN-244 -->
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-javadoc-plugin</artifactId>
+          <version>${javadocPluginVersion}</version>
           <configuration>
             <additionalparam>-Xdoclint:none</additionalparam>
             <quiet>true</quiet>
@@ -500,6 +631,40 @@
           <artifactId>maven-bundle-plugin</artifactId>
           <version>2.3.7</version>
           <extensions>true</extensions>
+        </plugin>
+
+
+        <!-- Plugins from codehaus mojo -->
+
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>animal-sniffer-maven-plugin</artifactId>
+          <version>${animalSnifferPluginVersion}</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>build-helper-maven-plugin</artifactId>
+          <version>${buildHelperPluginVersion}</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>license-maven-plugin</artifactId>
+          <version>${licensePluginVersion}</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.codehaus.plexus</groupId>
+          <artifactId>plexus-component-metadata</artifactId>
+          <version>${plexusComponentMetadataPluginVersion}</version>
+        </plugin>
+
+        <!-- Plugins from nuiton -->
+        <plugin>
+          <groupId>org.nuiton</groupId>
+          <artifactId>helper-maven-plugin</artifactId>
+          <version>${helperPluginVersion}</version>
         </plugin>
 
         <plugin>
@@ -522,6 +687,18 @@
               </configuration>
             </execution>
           </executions>
+        </plugin>
+
+        <plugin>
+          <groupId>org.sonatype.plugins</groupId>
+          <artifactId>nexus-staging-maven-plugin</artifactId>
+          <version>${nexusStaginPluginVersion}</version>
+          <extensions>true</extensions>
+          <configuration>
+            <serverId>ossrh</serverId>
+            <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+            <autoReleaseAfterClose>true</autoReleaseAfterClose>
+          </configuration>
         </plugin>
 
       </plugins>
@@ -829,7 +1006,10 @@
                   <goal>sign</goal>
                 </goals>
                 <configuration>
-                  <gpgArguments>--charset utf-8</gpgArguments>
+                  <gpgArguments>
+                    <argument>--charset</argument>
+                    <argument>utf-8</argument>
+                  </gpgArguments>
                 </configuration>
               </execution>
             </executions>
