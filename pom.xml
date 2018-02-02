@@ -80,6 +80,10 @@
     <connection>scm:git:git@gitlab.com:${projectPath}.git</connection>
     <developerConnection>scm:git:ssh://git@gitlab.com:${projectPath}.git</developerConnection>
   </scm>
+  <issueManagement>
+    <system>gitlab</system>
+    <url>https://gitlab.com/${projectPath}/issues</url>
+  </issueManagement>
   <distributionManagement>
     <site>
       <id>gitlab.com</id>
@@ -89,6 +93,7 @@
 
   <properties>
     <projectPath>oyvindwe/jgit-flow</projectPath>
+    <stageId>oyvindwe</stageId>
 
     <!-- report plugins version -->
     <changesPluginVersion>2.12.1</changesPluginVersion>
@@ -496,6 +501,29 @@
           <version>2.3.7</version>
           <extensions>true</extensions>
         </plugin>
+
+        <plugin>
+          <groupId>io.ultreia.java4all.jgitflow</groupId>
+          <artifactId>jgitflow-maven-plugin</artifactId>
+          <version>${jgitflowPluginVersion}</version>
+          <configuration>
+            <autoVersionSubmodules>true</autoVersionSubmodules>
+            <addScmCommentSuffixOnMerge>false</addScmCommentSuffixOnMerge>
+          </configuration>
+          <executions>
+            <execution>
+              <id>default-cli</id>
+              <goals>
+                <goal>release-finish</goal>
+              </goals>
+              <configuration>
+                <pushReleases>true</pushReleases>
+                <enableSshAgent>true</enableSshAgent>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
+
       </plugins>
     </pluginManagement>
 
@@ -594,5 +622,397 @@
         </plugins>
       </reporting>
     </profile>
+
+
+    <!-- perform only on a release stage when using the maven-release-plugin -->
+    <profile>
+      <id>license-profile</id>
+      <activation>
+        <property>
+          <name>performRelease</name>
+          <value>true</value>
+        </property>
+      </activation>
+
+      <build>
+
+        <defaultGoal>generate-resources</defaultGoal>
+
+        <plugins>
+
+          <!-- add license and third-party files to build -->
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>license-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>attach-licenses</id>
+                <goals>
+                  <goal>update-project-license</goal>
+                  <goal>add-third-party</goal>
+                </goals>
+                <configuration>
+                  <licenseMerges>
+                    <licenseMerge>
+                      The Apache Software License, Version 2.0|Apache License, Version 2.0|Apache License V2.0|Apache
+                      2|ASF 2.0|apache-2.0|Apache Public License 2.0
+                    </licenseMerge>
+                    <licenseMerge>BSD License|BSD license|BSD</licenseMerge>
+                    <licenseMerge>MIT License|MIT license|MIT</licenseMerge>
+                    <licenseMerge>
+                      Lesser General Public License (LPGL) v 2.1|GNU Lesser General Public License, 2.1|LGPL 2.1
+                    </licenseMerge>
+                    <licenseMerge>
+                      Lesser General Public License (LPGL)|GNU Lesser General Public License|GNU LESSER GENERAL PUBLIC
+                      LICENSE|LGPL|lgpl
+                    </licenseMerge>
+                    <licenseMerge>
+                      COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) Version 1.0|Common Development and Distribution
+                      License (CDDL) v1.0
+                    </licenseMerge>
+                    <licenseMerge>Indiana University Extreme! Lab Software License, version 1.1.1|Indiana University
+                      Extreme! Lab Software License
+                    </licenseMerge>
+                  </licenseMerges>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+
+        </plugins>
+
+      </build>
+    </profile>
+
+    <!-- perform only on a release to do quality checks on release -->
+    <profile>
+      <id>release-quality-profile</id>
+      <activation>
+        <property>
+          <name>performRelease</name>
+          <value>true</value>
+        </property>
+      </activation>
+
+      <build>
+        <plugins>
+
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>animal-sniffer-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>check</goal>
+                </goals>
+                <configuration>
+                  <signature>
+                    <groupId>org.codehaus.mojo.signature</groupId>
+                    <artifactId>${signatureArtifactId}</artifactId>
+                    <version>${signatureVersion}</version>
+                  </signature>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+
+          <plugin>
+            <artifactId>maven-enforcer-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>check-project</id>
+                <goals>
+                  <goal>enforce</goal>
+                </goals>
+                <phase>validate</phase>
+                <configuration>
+                  <rules>
+                    <requireFilesExist>
+                      <files>
+                        <file>LICENSE.txt</file>
+                        <file>README.md</file>
+                      </files>
+                    </requireFilesExist>
+                    <requireProperty>
+                      <property>organizationId</property>
+                      <message>"organizationId property must be specified."</message>
+                      <regex>.+$</regex>
+                      <regexMessage>"organizationId property can not be empty."</regexMessage>
+                    </requireProperty>
+                    <requireProperty>
+                      <property>projectId</property>
+                      <message>"projectId property must be specified."</message>
+                      <regex>.+$</regex>
+                      <regexMessage>"projectId property can not be empty."</regexMessage>
+                    </requireProperty>
+                    <requireProperty>
+                      <property>stageId</property>
+                      <message>"stageId property must be specified."</message>
+                      <regex>.+$</regex>
+                      <regexMessage>"stageId property can not be empty."</regexMessage>
+                    </requireProperty>
+                    <requireMavenVersion>
+                      <version>${maven.version}</version>
+                    </requireMavenVersion>
+                    <dependencyConvergence />
+                    <bannedDependencies>
+                      <excludes>
+                        <exclude>
+                          org.codehaus.plexus:plexus-component-api
+                        </exclude>
+                      </excludes>
+                      <message>
+                        The new containers are not supported. You
+                        probably added a dependency that is missing the
+                        exclusions.
+                      </message>
+                    </bannedDependencies>
+                    <enforceBytecodeVersion>
+                      <maxJdkVersion>${javaVersion}</maxJdkVersion>
+                    </enforceBytecodeVersion>
+                    <banDuplicateClasses>
+                      <findAllDuplicates>true</findAllDuplicates>
+                    </banDuplicateClasses>
+                  </rules>
+                  <fail>true</fail>
+                </configuration>
+              </execution>
+            </executions>
+            <dependencies>
+              <dependency>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>extra-enforcer-rules</artifactId>
+                <version>1.0-beta-4</version>
+              </dependency>
+            </dependencies>
+          </plugin>
+
+        </plugins>
+      </build>
+    </profile>
+
+    <profile>
+      <id>release-sign-artifacts</id>
+      <activation>
+        <property>
+          <name>performRelease</name>
+          <value>true</value>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.nuiton</groupId>
+            <artifactId>helper-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>get-pgp-pass-phrase</id>
+                <goals>
+                  <goal>share-server-secret</goal>
+                </goals>
+                <phase>verify</phase>
+                <configuration>
+                  <serverId>omw-gpg-signer</serverId>
+                  <usernameOut>gpg.keyname</usernameOut>
+                  <passwordOut>gpg.passphrase</passwordOut>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+                <configuration>
+                  <gpgArguments>--charset utf-8</gpgArguments>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <!-- This profile update license stuff with new goal update-file-header -->
+    <profile>
+      <id>update-file-header</id>
+      <activation>
+        <property>
+          <name>performRelease</name>
+          <value>true</value>
+        </property>
+      </activation>
+
+      <properties>
+        <license.descriptor>src/license/project.xml</license.descriptor>
+        <license.excludes>**/ftl/*.ftl,**/i18n/*.properties,**/THIRD-PARTY.properties,**/*.sh</license.excludes>
+      </properties>
+      <build>
+        <defaultGoal>process-resources</defaultGoal>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>license-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>update-file-header</id>
+                <goals>
+                  <goal>update-file-header</goal>
+                </goals>
+                <phase>process-resources</phase>
+              </execution>
+              <execution>
+                <id>update-pom-header</id>
+                <goals>
+                  <goal>update-file-header</goal>
+                </goals>
+                <configuration>
+                  <roots>
+                    <root>${project.basedir}</root>
+                  </roots>
+                  <includes>
+                    <include>pom.xml</include>
+                  </includes>
+                </configuration>
+                <phase>process-resources</phase>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <profile>
+      <id>analyze-dependencies</id>
+      <activation>
+        <property>
+          <name>performRelease</name>
+          <value>true</value>
+        </property>
+      </activation>
+      <build>
+        <defaultGoal>verify</defaultGoal>
+        <plugins>
+          <plugin>
+            <artifactId>maven-dependency-plugin</artifactId>
+            <inherited>true</inherited>
+            <executions>
+              <execution>
+                <id>analyze</id>
+                <goals>
+                  <goal>analyze-only</goal>
+                </goals>
+                <configuration>
+                  <verbose>true</verbose>
+                  <failOnWarning>true</failOnWarning>
+                  <ignoreNonCompile>true</ignoreNonCompile>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <profile>
+      <id>maven-3</id>
+      <activation>
+        <file>
+          <!--  This employs that the basedir expression is only recognized by Maven 3.x (see MNG-2363) -->
+          <exists>${basedir}</exists>
+        </file>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-site-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>attach-descriptor</id>
+                <goals>
+                  <goal>attach-descriptor</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <profile>
+      <id>update-changelog</id>
+      <build>
+        <defaultGoal>generate-resources</defaultGoal>
+        <plugins>
+          <plugin>
+            <groupId>io.ultreia.maven</groupId>
+            <artifactId>gitlab-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>generate-changelog</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <profile>
+      <id>update-staging-changelog</id>
+      <build>
+        <defaultGoal>generate-resources</defaultGoal>
+        <plugins>
+          <plugin>
+            <groupId>io.ultreia.maven</groupId>
+            <artifactId>gitlab-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <goals>
+                  <!--suppress MavenModelInspection -->
+                  <goal>generate-staging-changelog</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <!-- Profile to generate a multi module site (you need to place file .mvn/simple-site fil in your project) -->
+    <profile>
+      <id>multi-module-site-profile</id>
+      <activation>
+        <file>
+          <exists>${basedir}/.mvn/multi-module-site</exists>
+        </file>
+      </activation>
+      <build>
+        <pluginManagement>
+          <plugins>
+            <plugin>
+              <artifactId>maven-site-plugin</artifactId>
+              <configuration>
+                <topSiteURL>scm:git:https://git@gitlab.com/${projectPath}.git</topSiteURL>
+                <stagingDirectory>${user.dir}/target/staging</stagingDirectory>
+              </configuration>
+            </plugin>
+            <plugin>
+              <artifactId>maven-scm-publish-plugin</artifactId>
+              <configuration>
+                <scmBranch>pages</scmBranch>
+              </configuration>
+            </plugin>
+          </plugins>
+        </pluginManagement>
+      </build>
+    </profile>
+
   </profiles>
 </project>
