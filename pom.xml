@@ -149,6 +149,7 @@
     <javaVersion>1.7</javaVersion>
     <signatureArtifactId>java17</signatureArtifactId>
     <signatureVersion>1.0</signatureVersion>
+    <jgitflowPluginVersion>1.0.0-rc-1</jgitflowPluginVersion>
 
     <maven.version>2.2.1</maven.version>
     <!--<mavenVersion>3.0.5</mavenVersion>-->
