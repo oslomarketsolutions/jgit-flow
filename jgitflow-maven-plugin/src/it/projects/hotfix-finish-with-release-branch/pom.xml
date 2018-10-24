@@ -50,7 +50,7 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>com.manamind.jgitflow</groupId>
+                <groupId>no.oms.jgitflow</groupId>
                 <artifactId>jgitflow-maven-plugin</artifactId>
                 <version>@project.version@</version>
                 <configuration>

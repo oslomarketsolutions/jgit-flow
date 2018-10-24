@@ -50,7 +50,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.manamind.jgitflow</groupId>
+            <groupId>no.oms.jgitflow</groupId>
             <artifactId>jgitflow-it-support</artifactId>
             <version>@project.version@</version>
             <scope>provided</scope>
@@ -60,7 +60,7 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>com.manamind.jgitflow</groupId>
+                <groupId>no.oms.jgitflow</groupId>
                 <artifactId>jgitflow-maven-plugin</artifactId>
                 <version>@project.version@</version>
                 <configuration>

@@ -23,7 +23,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>com.manamind.jgitflow</groupId>
+    <groupId>no.oms.jgitflow</groupId>
     <artifactId>jgitflow-parent</artifactId>
     <version>1.1-SNAPSHOT</version>
   </parent>
@@ -40,12 +40,12 @@
 
   <dependencies>
     <dependency>
-      <groupId>com.manamind.jgitflow</groupId>
+      <groupId>no.oms.jgitflow</groupId>
       <artifactId>jgitflow-core</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.manamind.jgitflow</groupId>
+      <groupId>no.oms.jgitflow</groupId>
       <artifactId>jgitflow-maven-api</artifactId>
       <version>${project.version}</version>
     </dependency>
