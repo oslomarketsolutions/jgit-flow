@@ -102,6 +102,12 @@ public class FeatureFinishMojo extends AbstractJGitFlowMojo
     @Component(hint = "feature")
     FlowReleaseManager releaseManager;
 
+    /**
+     * If set to true, skip pre-commit and message hooks when committing.
+     */
+    @Parameter(defaultValue = "false", property = "noVerifyFeature")
+    protected boolean noVerifyFeature = false;
+
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException
     {
@@ -132,7 +138,8 @@ public class FeatureFinishMojo extends AbstractJGitFlowMojo
            .setUseReleaseProfile(false)
                 .setEol(eol)
            .setConsistentProjectVersions(consistentProjectVersions)
-           .setFlowInitContext(getFlowInitContext().getJGitFlowContext());
+           .setFlowInitContext(getFlowInitContext().getJGitFlowContext())
+           .setNoVerify(noVerifyFeature);
 
         try
         {
